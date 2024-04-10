@@ -62,7 +62,10 @@ replace_main_package_name(){
         echo "No package name provided"
         exit 1
     fi
-    sed -i 's^package main/package $mainPackageName/' "$filePath/$mainPackageName" 
+    testPath="$filePath/main.go" 
+    echo "testPath: $testPath"
+
+    sed -i "s/package main/package $mainPackageName/" "$testPath" 
 }
 
 enableDatabase="true"
@@ -141,3 +144,4 @@ go mod init "$projectName"
 
 copy_basic_app_template "$projectName" "$baseDir"
 get_go_dependencies "$projectDir"
+# replace_main_package_name "$baseDir" "$projectName"
